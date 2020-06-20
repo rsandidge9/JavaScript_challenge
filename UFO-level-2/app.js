@@ -43,17 +43,23 @@ function updateTable(data) {
 function ufoFilter() {
 
     //Prevent the page from refreshing
-    //d3.event.preventDefault();
+    d3.event.preventDefault();
     // Select the input element and get the raw HTML node
-    let inputElement = d3.select("#datetime").property("value");
+    let inputElement = d3.select("#input").property("value");
+
+    console.log(inputElement)
     let filteredData = tableData;
     if (inputElement) {
         filteredData = filteredData.filter(ufo => ufo.datetime === inputElement);
-    }
-    updateTable(filteredData);
-}
-d3.select("#filter-btn").on("click", ufoFilter);
+        filteredData = filteredData.filter(ufo => ufo.datetimeufo.city === inputElement);
+        filteredData = filteredData.filter(ufo => ufo.datetimeufo.state === inputElement);
+        filteredData = filteredData.filter(ufo => ufo.datetimeufo.country === inputElement);
+        filteredData = filteredData.filter(ufo => ufo.datetimeufo.shape === inputElement);
 
+        updateTable(filteredData);
+    }
+    d3.select("#filter-btn").on("click", ufoFilter);
+};
 // Get the value property of the input element
 //let inputValue = inputElement.property("value");
 //console.log(inputValue);
